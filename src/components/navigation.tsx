@@ -71,13 +71,14 @@ const Navigation = ({ className = "" }: { className?: string }) => {
         className,
       )}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
-            <Link href="/" className="text-white font-bold text-xl">
-              <span className="bg-gradient-to-r from-red-500 to-purple-600 bg-clip-text text-transparent">
-                Portfolio
+            <Link href="/" className="text-white text-2xl">
+              {/* <span className="bg-gradient-to-r from-[#EEEEEE] to-[#D84040] bg-clip-text text-transparent"> */}
+              <span className="bg-gradient-to-r from-[#1D1616] to-[#D84040] hover:from-[#D84040] hover:to-[#1D1616] text-white px-6 py-3 rounded-full flex items-center gap-2 text-lg group transition-all duration-300">
+                Ayushman Malla 
               </span>
             </Link>
           </motion.div>
@@ -96,8 +97,8 @@ const Navigation = ({ className = "" }: { className?: string }) => {
                     className={cn(
                       "flex items-center space-x-1 px-3 py-2 rounded-md text-sm font-medium transition-colors",
                       pathname === item.href
-                        ? "text-purple-400 border-b-2 border-red-500"
-                        : "text-gray-300 hover:text-purple-300 hover:bg-black/20",
+                        ? "text-[#EEEEEE] border-b-2 border-[#8E1616]"
+                        : "text-gray-300 hover:text-[#EEEEEE] hover:bg-black/20",
                     )}
                   >
                     {item.icon}
@@ -146,8 +147,8 @@ const Navigation = ({ className = "" }: { className?: string }) => {
               className={cn(
                 "flex items-center space-x-3 px-3 py-2 rounded-md text-base font-medium",
                 pathname === item.href
-                  ? "text-purple-400 bg-black/50"
-                  : "text-gray-300 hover:text-purple-300 hover:bg-black/30",
+                ? "text-[#EEEEEE] border-b-2 border-[#8E1616]"
+                : "text-gray-300 hover:text-[#EEEEEE] hover:bg-black/20",
               )}
             >
               {item.icon}

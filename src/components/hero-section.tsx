@@ -76,17 +76,17 @@ const HeroSection = ({
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-[700px] flex flex-col items-center justify-center overflow-hidden bg-black"
+      className="relative w-screen h-screen flex flex-col items-center justify-center overflow-hidden bg-black"
     >
       {/* Particle system background */}
       <div className="absolute inset-0 z-0">
         <div className="w-full h-full bg-black">
           {/* Particle effect would be implemented here */}
-          <div className="absolute inset-0 opacity-30">
+          <div className="absolute inset-0 opacity-100">
             {Array.from({ length: 50 }).map((_, i) => (
               <div
                 key={i}
-                className="absolute rounded-full bg-purple-500"
+                className="absolute rounded-full bg-[#eeeeee]"
                 style={{
                   width: `${Math.random() * 6 + 2}px`,
                   height: `${Math.random() * 6 + 2}px`,
@@ -106,7 +106,7 @@ const HeroSection = ({
       <div
         className="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-black/50 to-black"
         style={{
-          background: `radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, rgba(128, 0, 128, 0.3), rgba(0, 0, 0, 0.8) 70%)`,
+          background: `radial-gradient(circle at ${mousePosition.x * 100}% ${mousePosition.y * 100}%, #8E1616, rgba(0, 0, 0, 0.8) 40%)`,
         }}
       />
 
@@ -114,8 +114,8 @@ const HeroSection = ({
       <div
         className="absolute inset-0 z-10 opacity-20"
         style={{
-          backgroundImage: `linear-gradient(rgba(255, 0, 128, 0.1) 1px, transparent 1px), 
-                           linear-gradient(90deg, rgba(255, 0, 128, 0.1) 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(rgba(255, 255, 255, 0.33) 1px, transparent 1px), 
+                           linear-gradient(90deg, rgba(252, 252, 252, 0.38) 1px, transparent 1px)`,
           backgroundSize: "20px 20px",
         }}
       />
@@ -134,7 +134,7 @@ const HeroSection = ({
 
         <animated.p
           style={subtitleProps}
-          className="text-lg md:text-xl mb-10 text-purple-200"
+          className="text-lg md:text-xl mb-10 text-[#EEEEEE]"
         >
           {subtitle}
         </animated.p>
@@ -142,7 +142,7 @@ const HeroSection = ({
         <animated.div style={buttonProps}>
           <Button
             onClick={scrollToNextSection}
-            className="bg-gradient-to-r from-purple-600 to-red-500 hover:from-purple-700 hover:to-red-600 text-white px-8 py-6 rounded-full flex items-center gap-2 text-lg group transition-all duration-300"
+            className="bg-gradient-to-r from-[#1D1616] to-[#D84040] hover:from-[#D84040] hover:to-[#1D1616] text-white px-8 py-6 rounded-full flex items-center gap-2 text-lg group transition-all duration-300"
           >
             Explore My Work
             <ArrowDown className="h-5 w-5 group-hover:translate-y-1 transition-transform" />
@@ -151,9 +151,9 @@ const HeroSection = ({
       </motion.div>
 
       {/* Glowing accent elements */}
-      <div className="absolute bottom-10 left-10 w-20 h-20 rounded-full bg-purple-500/20 blur-xl z-10"></div>
-      <div className="absolute top-20 right-20 w-32 h-32 rounded-full bg-red-500/20 blur-xl z-10"></div>
-      <div className="absolute top-1/3 left-1/4 w-16 h-16 rounded-full bg-pink-500/20 blur-xl z-10"></div>
+      <div className="absolute bottom-10 left-10 w-20 h-20 rounded-full bg-[#EEEEEE]/20 blur-xl z-10"></div>
+      <div className="absolute top-20 right-20 w-32 h-32 rounded-full bg-[#EEEEEE]/20 blur-xl z-10"></div>
+      <div className="absolute top-1/3 left-1/4 w-16 h-16 rounded-full bg-[#EEEEEE]/20 blur-xl z-10"></div>
     </div>
   );
 };

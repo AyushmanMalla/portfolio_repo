@@ -160,7 +160,7 @@ const SkillsSection = ({
                 className={cn(
                   "px-4 py-2 rounded-md transition-all duration-300",
                   selectedCategory === category.id
-                    ? "bg-gradient-to-r from-red-500 to-purple-600 text-white"
+                    ? "bg-gradient-to-r from-red-600 to-blue-900 text-white"
                     : "text-gray-400 hover:text-white",
                 )}
               >
@@ -223,7 +223,7 @@ const SkillsSection = ({
 
                         <div className="w-full bg-gray-800 h-2 rounded-full overflow-hidden">
                           <motion.div
-                            className="h-full bg-gradient-to-r from-red-500 to-purple-600"
+                            className="h-full bg-gradient-to-r from-red-600 to-blue-900"
                             initial={{ width: 0 }}
                             whileInView={{ width: `${skill.level}%` }}
                             transition={{ duration: 1, ease: "easeOut" }}

@@ -26,27 +26,27 @@ const ProjectCarousel = ({
   projects = [
     {
       id: "1",
-      title: "FPGA-Based Neural Network Accelerator",
+      title: "FPGA-Based Deep Neural Network Accelerator",
       description:
-        "Custom hardware implementation of a neural network inference engine optimized for edge devices.",
+        "Custom hardware implementation of a Deep Neural Network - Variational Auto Encoder(VAE) on a Field Programmable Gate Array(FPGA). Required extensive knowledge of Statistical Methods, VHDL Programming, Deep Learning and Computer Architecture. Please refer to the paper below for more info!",
       image:
         "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
       category: "fpga",
     },
     {
       id: "2",
-      title: "Probabilistic Graph Model Visualization",
+      title: "Simulator for Carbon Tax Pricing",
       description:
-        "Interactive visualization of Bayesian networks and Markov models for statistical inference.",
+        "Collaborated with a team of 3 to develop a webApp simulator for policy makers to backtest economic policies to see how different carbon tax rates effect different industries.  Implemented a Reinforcement Learning (RL) environment within the simulator, leveraging Proximal Policy Optimization (PPO) algorithms to model and optimize industry actions in response to policy changes.",
       image:
         "https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&q=80",
       category: "algorithm",
     },
     {
       id: "3",
-      title: "Quantum-Inspired Combinatorial Optimizer",
+      title: "Deep Reinforcement Learning for trading/portfolio Rebalancing",
       description:
-        "Algorithm for solving complex combinatorial optimization problems using quantum-inspired techniques.",
+        "Implementing additional functionality to the FinRL library (open source) in Python: uses multiple deep learning agents to train on real-time market data from sources like yahoo finance along with other technical indicators (MACD and RSI).  Using Ctrader to automate trading process. Goal: reach a capital of 100K USD with an initial investment of 10K.",
       image:
         "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80",
       category: "ml",

@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <div>
-            <h3 className="text-xl font-bold bg-gradient-to-r from-red-500 to-purple-600 bg-clip-text text-transparent mb-4">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-red-500 to-blue-900 bg-clip-text text-transparent mb-4">
               Contact
             </h3>
             <p className="text-gray-400 mb-4">
@@ -28,7 +28,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-bold bg-gradient-to-r from-red-500 to-purple-600 bg-clip-text text-transparent mb-4">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-red-500 to-blue-900 bg-clip-text text-transparent mb-4">
               Quick Links
             </h3>
             <ul className="space-y-2">
@@ -68,7 +68,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h3 className="text-xl font-bold bg-gradient-to-r from-red-500 to-purple-600 bg-clip-text text-transparent mb-4">
+            <h3 className="text-xl font-bold bg-gradient-to-r from-red-500 to-blue-900 bg-clip-text text-transparent mb-4">
               Connect
             </h3>
             <div className="flex space-x-4">
@@ -112,7 +112,7 @@ const Footer = () => {
 
         <div className="flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm mb-4 md:mb-0">
-            © {currentYear} Portfolio. All rights reserved.
+            © {currentYear} Ayushman Malla. All rights reserved.
           </p>
           <div className="text-gray-500 text-sm">
             <span className="inline-flex items-center">
