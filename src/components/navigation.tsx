@@ -75,7 +75,7 @@ const Navigation = ({ className = "" }: { className?: string }) => {
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
           <motion.div whileHover={{ scale: 1.05 }} className="flex-shrink-0">
-            <Link href="/" className="text-white text-2xl">
+            <Link href="/" className="text-white font-bold text-2xl">
               {/* <span className="bg-gradient-to-r from-[#EEEEEE] to-[#D84040] bg-clip-text text-transparent"> */}
               <span className="bg-gradient-to-r from-[#1D1616] to-[#D84040] hover:from-[#D84040] hover:to-[#1D1616] text-white px-6 py-3 rounded-full flex items-center gap-2 text-lg group transition-all duration-300">
                 Ayushman Malla 

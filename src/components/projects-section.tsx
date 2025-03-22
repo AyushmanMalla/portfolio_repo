@@ -1,12 +1,9 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ArrowDown, Code, Cpu, Brain } from "lucide-react";
-import ProjectCarousel from "./project-carousel";
 
 interface ProjectsSectionProps {
   className?: string;
@@ -17,203 +14,166 @@ const ProjectsSection = ({
   className,
   id = "projects",
 }: ProjectsSectionProps) => {
-  const [activeCategory, setActiveCategory] = useState<string>("all");
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { y: 20, opacity: 0 },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-      },
-    },
-  };
-
-  // Project categories
-  const categories = [
-    { id: "all", label: "All Projects" },
-    { id: "fpga", label: "FPGA Design", icon: <Cpu className="h-4 w-4" /> },
-    {
-      id: "algorithm",
-      label: "Algorithms",
-      icon: <Code className="h-4 w-4" />,
-    },
-    {
-      id: "ml",
-      label: "Machine Learning",
-      icon: <Brain className="h-4 w-4" />,
-    },
-  ];
-
   // Featured projects data
   const featuredProjects = [
     {
       id: "1",
       title: "FPGA-Based Neural Network Accelerator",
       description:
-      "Custom hardware implementation of a Deep Neural Network - Variational Auto Encoder(VAE) on a Field Programmable Gate Array(FPGA). Required extensive knowledge of Statistical Methods, VHDL Programming, Deep Learning and Computer Architecture. Please refer to the paper below for more info!",
+        "Custom hardware implementation of a Deep Neural Network - Variational Auto Encoder(VAE) on a Field Programmable Gate Array(FPGA). Required extensive knowledge of Statistical Methods, VHDL Programming, Deep Learning and Computer Architecture. Please do refer to the paper below for more info!",
       image:
         "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
       category: "fpga",
+      // color: "#4ade80" // neon green
+      color: "#D84040"
     },
     {
       id: "2",
       title: "Simulator for Carbon Tax Pricing",
       description:
-      "Collaborated with a team of 3 to develop a webApp simulator for policy makers to backtest economic policies to see how different carbon tax rates effect different industries.  Implemented a Reinforcement Learning (RL) environment within the simulator, leveraging Proximal Policy Optimization (PPO) algorithms to model and optimize industry actions in response to policy changes.",
+        "Collaborated with a team of 3 to develop a webApp simulator for policy makers to backtest economic policies to see how different carbon tax rates effect different industries. Implemented a Reinforcement Learning environment with PPO algorithms.",
       image:
-        "https://images.unsplash.com/photo-1545987796-200677ee1011?w=800&q=80",
+        "https://plus.unsplash.com/premium_photo-1661898205432-d648667b9c76?q=80&w=1931&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       category: "algorithm",
+      // color: "#f472b6" // pink
+      color: "#D84040",
+      repo: "https://github.com/AyushmanMalla/RL-based_economicPolicySimulator"
     },
     {
       id: "3",
-      title: "Deep Reinforcement Learning for trading/portfolio Rebalancing",
+      title: "End to End Trading Engine with LLM Functionality",
       description:
-      "Implementing additional functionality to the FinRL library (open source) in Python: uses multiple deep learning agents to train on real-time market data from sources like yahoo finance along with other technical indicators (MACD and RSI).  Using Ctrader to automate trading process. Goal: reach a capital of 100K USD with an initial investment of 10K.",
+        "Working on creating a trading engine that looks for certain alphas and signals and gives trading conditions. Implementing the architecture in the figure above! Taken inspiration from NexxusTrade.io",
       image:
-        "https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=800&q=80",
+        "https://i.ibb.co/fGSNfkq3/download.jpg",
       category: "ml",
+      // color: "#60a5fa" // blue
+      color: "#D84040",
+      repo: "https://github.com/AyushmanMalla/tradesage_AyushCopy"
     },
     {
       id: "4",
-      title: "Real-time Signal Processing Pipeline",
+      title: "Machine Learning for X-Ray Image Analysis: An Embedded Approach",
       description:
-        "FPGA implementation of a high-throughput signal processing system for radar applications.",
+        "Working on optimised Vision Transformers and other Novel Architectures to be deployed into resource constrained environments in Medical Applications. Currently exploring publicly available Chest X-Ray datasets. This project is part of my Final Year Project at NTU under the supervision of Prof. Wong Liang Jie",
       image:
-        "https://images.unsplash.com/photo-1517373116369-9bdb8cdc9f62?w=800&q=80",
+        "https://plus.unsplash.com/premium_photo-1699387204388-120141c76d51?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8bWVkaWNhbCUyMGltYWdpbmd8ZW58MHx8MHx8fDA%3D",
       category: "fpga",
-    },
-    {
-      id: "5",
-      title: "Generative Adversarial Network for Circuit Design",
-      description:
-        "ML model that generates optimized circuit layouts based on performance requirements.",
-      image:
-        "https://images.unsplash.com/photo-1580894732444-8ecded7900cd?w=800&q=80",
-      category: "ml",
+      // color: "#f97316" // orange
+      color: "#D84040",
+      repo: "https://github.com/AyushmanMalla/torchxrayvision"
     },
   ];
 
-  // Filter projects based on active category
-  const filteredProjects =
-    activeCategory === "all"
-      ? featuredProjects
-      : featuredProjects.filter(
-          (project) => project.category === activeCategory,
-        );
+  // Group projects into pairs
+  const projectPairs = [];
+  for (let i = 0; i < featuredProjects.length; i += 2) {
+    const pair = featuredProjects.slice(i, i + 2);
+    projectPairs.push(pair);
+  }
 
   return (
     <section
       id={id}
-      ref={sectionRef}
       className={cn(
-        "relative h-screen w-screen py-20 px-4 md:px-8 lg:px-12 bg-black",
+        "relative bg-black w-screen bg-gradient-to-b from-[#D84040]/25 via-black to-[#1D1616] z-0",
         className,
       )}
     >
-      {/* Background elements */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#D84040]/10 via-black to-black z-0" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(145, 3, 15, 0.25),transparent_40%)] z-0" />
-
-      {/* Grid pattern */}
-      <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxwYXRoIGZpbGw9IiMzMzMiIGQ9Ik0wIDBoNjB2NjBIMHoiLz48cGF0aCBkPSJNMzAgMzBoMzB2MzBIMzB6IiBzdHJva2U9IiM0NDQiIHN0cm9rZS13aWR0aD0iLjUiLz48cGF0aCBkPSJNMCAzMGgzMHYzMEgweiIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9Ii41Ii8+PC9nPjwvc3ZnPg==')] opacity-5 z-0" />
-
-      <div className="relative z-10 max-w-7xl mx-auto">
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="space-y-12"
-        >
-          {/* Section header */}
-          <motion.div variants={itemVariants} className="text-center space-y-4">
-            <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#EEEEEE] to-[#8E1616]">
-              Featured Projects
-            </h2>
-            <p className="text-[#EEEEEE] max-w-2xl mx-auto text-xl">
-              Some of my projects I am particularly proud of 
-              for a variety of reasons!
-            </p>
-            <div className="flex justify-center">
-              <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-              >
-                <ArrowDown className="h-6 w-6 text-[#D84040] mt-4" />
-              </motion.div>
-            </div>
-          </motion.div>
-
-          {/* Project categories tabs */}
-          <motion.div variants={itemVariants}>
-            <Tabs
-              defaultValue="all"
-              className="w-full"
-              onValueChange={setActiveCategory}
-            >
-              <div className="flex justify-center mb-8">
-                <TabsList className="bg-black/50 border border-[#D84040]/50 p-1">
-                  {categories.map((category) => (
-                    <TabsTrigger
-                      key={category.id}
-                      value={category.id}
-                      className="flex items-center gap-2 data-[state=active]:bg-[#D84040]/50 data-[state=active]:text-[#EEEEEE]"
-                    >
-                      {category.icon}
-                      {category.label}
-                    </TabsTrigger>
-                  ))}
-                </TabsList>
-              </div>
-
-              {/* Project carousel */}
-              <TabsContent value="all" className="mt-0">
-                <ProjectCarousel projects={featuredProjects} />
-              </TabsContent>
-
-              {categories.slice(1).map((category) => (
-                <TabsContent
-                  key={category.id}
-                  value={category.id}
-                  className="mt-0"
-                >
-                  <ProjectCarousel
-                    projects={filteredProjects}
-                    autoRotate={true}
-                  />
-                </TabsContent>
-              ))}
-            </Tabs>
-          </motion.div>
-
-          {/* Call to action */}
-          <motion.div
-            variants={itemVariants}
-            className="flex justify-center mt-12"
-          >
-            <Button className="bg-gradient-to-r from-purple-700 to-red-700 hover:from-purple-800 hover:to-red-800 text-white border-none">
-              View All Projects
-            </Button>
-          </motion.div>
-        </motion.div>
+      {/* Section Header */}
+      <div className="py-24 flex flex-col justify-center items-center text-center px-4 relative">
+        <h2 className="text-5xl md:text-6xl font-bold text-white mb-6">
+          Featured <span className="text-[#D84040]">Projects</span>
+        </h2>
+        <p className="text-xl text-white/80 max-w-2xl mb-12">
+          Explore my projects that showcase my skills in machine learning, 
+          FPGA design, and algorithm development.
+        </p>
       </div>
+      
+      {/* Projects in pairs */}
+      {projectPairs.map((pair, pairIndex) => (
+        <div key={pairIndex} className="py-16">
+          <div className="max-w-7xl mx-auto px-6 md:px-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+              {pair.map((project, index) => (
+                <ProjectItem 
+                  key={project.id} 
+                  project={project} 
+                  index={pairIndex * 2 + index} 
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
     </section>
+  );
+};
+
+// Redesigned individual project component
+const ProjectItem = ({ project, index }) => {
+  const projectRef = useRef(null);
+  const isInView = useInView(projectRef, { 
+    once: false, 
+    amount: 0.3,
+    margin: "-50px 0px -50px 0px" 
+  });
+  
+  return (
+    <motion.div 
+      ref={projectRef}
+      initial={{ y: 50, opacity: 0 }}
+      animate={isInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+      transition={{ duration: 0.6, delay: index % 2 * 0.2 }}
+      className="rounded-xl overflow-hidden shadow-2xl bg-black/40 flex flex-col h-full"
+    >
+      {/* Project Image */}
+      <div className="relative h-64 overflow-hidden">
+        <div className="absolute inset-0 bg-black/30 z-10" />
+        <motion.div
+          initial={{ scale: 1.1 }}
+          animate={isInView ? { scale: 1 } : { scale: 1.1 }}
+          transition={{ duration: 0.8 }}
+          className="h-full w-full"
+        >
+          <img 
+            src={project.image} 
+            alt={project.title}
+            className="h-full w-full object-cover" 
+          />
+        </motion.div>
+        
+        {/* Project Number */}
+        <div className="absolute top-4 right-4 z-20">
+          <div 
+            className="text-4xl font-bold opacity-100 text-color-[#EEEEEE]"
+          >
+            {(index + 1).toString().padStart(2, '0')}
+          </div>
+        </div>
+      </div>
+      
+      {/* Project Content */}
+      <div className="p-6 flex flex-col flex-grow">
+        {/* Project Title with color accent */}
+        <h3 className="text-2xl font-bold mb-4 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-[#8E1616] to-[#D84040] ">
+          {project.title}
+        </h3>
+        
+        {/* Project Description */}
+        <p className="text-white text-base mb-6 flex-grow">
+          {project.description}
+        </p>
+        <a href={project.repo ? project.repo : "https://github.com/AyushmanMalla"} target="_blank">
+        <Button 
+          className="bg-gradient-to-r from-[#1D1616] to-[#D84040] hover:from-[#D84040] hover:to-[#1D1616] text-white px-2 py-1.5 rounded-full flex text-lg group transition-all duration-300"
+          style={{ backgroundColor: project.color }}
+        >
+          View Project
+        </Button></a>
+      </div>
+    </motion.div>
   );
 };
 
