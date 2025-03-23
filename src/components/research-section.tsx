@@ -31,41 +31,78 @@ interface ResearchPaper {
 
 const ResearchSection = ({
   title = "Research & Publications",
-  description = "Exploring the intersections of mathematics, statistics, and machine learning",
+  description = "Expanding my experience as a researcher in the field of Math for Machine Learning, Data Processing Methods, Embedded Low Latency Systems",
   papers = [
     {
       id: "paper1",
-      title: "Novel Approaches to Combinatorial Optimization in FPGA Design",
+      title: "Out-of-Distribution Detection(OOD) using Variational Autoencoder(VAE) on Resource Constrained FPGA: A literature review and framework - CURRENTLY WORKING ON NEXT ITERATION",
       abstract:
-        "This paper explores efficient algorithms for solving combinatorial optimization problems in the context of FPGA design, with applications to routing and placement challenges.",
-      field: "Combinatorics",
+        ` With the increased deployment of AI 
+models for different fields ranging from 
+manufacturing to creatives, it is imperative to 
+improve the detection of outliers (Out-of-Distribution 
+(OOD)) in the input data to mitigate the risk 
+associated with incorrect inference. Moreover, with 
+the increase in the speed of inference and data 
+pipelining, it is important to increase the throughput 
+of these detection systems while keeping the power 
+efficiency in mind. This paper focuses on creating a 
+framework for deploying a Variational Autoencoder 
+(VAE) on a resource constrained Field 
+Programmable Gate Array (FPGA): A Variational 
+Autoencoder is a statistical model that uses a 
+reconstruction probability for OOD; Running this on 
+an FPGA can help in decreasing the power 
+consumption for ML inference while also increasing 
+the throughput while keeping the accuracy of the 
+model within acceptable thresholds. The 
+applications of this are mainly in time-sensitive 
+environments such as Cyber Physical Systems 
+(CPS)[1], and statistical arbitrage for High 
+Frequency Trading (HFT). For example, it is 
+important to process the enormous amount of 
+market data from the stock exchange and perform 
+feature extraction on it within milliseconds. While 
+extensive scholarly attention has been devoted to 
+exploring various machine learning inference 
+methods on FPGAs, it is essential to explore the 
+specific application of VAEs on FPGAs due to its 
+specialized nature. `,
+      field: "Paper",
       year: 2023,
     },
     {
       id: "paper2",
       title:
-        "Statistical Analysis of Machine Learning Model Performance on Resource-Constrained Hardware",
+        "Learning Differences between STEM and NON-STEM Students in an Interdisciplinary Classroom Setting: A Qualitative and Quantitative Analysis using Natural Language Processing and Statistical Tests - STILL IN PROGRESS",
       abstract:
-        "A comprehensive study on the performance characteristics of various machine learning models when deployed on resource-constrained FPGA hardware platforms.",
-      field: "Statistics",
+        `This paper explores the differences in the learning outcomes and performances of students from different backgrounds(analysed based on STEM or NON-STEM and further categorisation where required.)
+        We use a two-pronged approach - Quantitative(basic statistical tests to measure differences in assessment scores) and Qualitative Analysis(Natural Language Processing Methods like Topic Modelling using Latent Dirichlet Allocation
+        and Sentiment Analysis using different BERT architectures to discover insights in reflection essays and Focus Group Discussions)`,
+      field: "Paper",
+      year: 2025,
+    },
+    {
+      id: "RA1",
+      title: "Research Assistant - Freshmen Year",
+      abstract:
+        `Collected data and gathered insights on AI Capable SoCs (System on Chip) and Smartphones. 
+         Conducted literature review on different Machine Learning Frameworks (e.g., TensorFlow Lite, Android NNAPI) and benchmarking tools used to quantify performance of 198+ Android SoCs.  
+         Found key metrics that defined performance of SoC and conducted hypothesis-testing on 776 smartphones. 
+        Built a Web Scraper that intelligently avoided rate-limits and scraped GSM Arena (largest global smartphone database); successfully collated data of 12,000+ devices.`,
+      field: "Research",
       year: 2022,
     },
     {
-      id: "paper3",
-      title: "Probabilistic Methods for Efficient Circuit Design",
-      abstract:
-        "This research introduces novel probabilistic approaches to circuit design that optimize for both performance and power consumption in modern FPGA architectures.",
-      field: "Probability",
-      year: 2023,
-    },
-    {
-      id: "paper4",
+      id: "RA2",
       title:
-        "Machine Learning Accelerators: A Comparative Study of Implementation Strategies",
+        "Research Assistant - Sophomore Summer",
       abstract:
-        "An in-depth analysis of different implementation strategies for machine learning accelerators, with a focus on trade-offs between performance, power, and resource utilization.",
-      field: "Machine Learning",
-      year: 2021,
+        ` Developed data pipeline that enabled API calls to Twitter and Botometer API to check bot score of users. 
+          Conducted data analysis on 420,000+ accounts based on bot scores.
+          Achieved theoretical limit of data collection speed due to API Rate limits; successfully collected 125,000 users scores within 175 hours [Limit = 720 requests/hour, Achieved = 714 requests/hour].`,
+      field: "Research",
+      year: 2023,
     },
   ],
 }: ResearchSectionProps) => {
@@ -150,14 +187,10 @@ const ResearchSection = ({
   // Get the icon for each research field
   const getFieldIcon = (field: string) => {
     switch (field.toLowerCase()) {
-      case "combinatorics":
-        return <Sigma className="h-5 w-5 text-purple-400" />;
-      case "statistics":
-        return <Calculator className="h-5 w-5 text-red-400" />;
-      case "probability":
-        return <Calculator className="h-5 w-5 text-pink-400" />;
-      case "machine learning":
-        return <Brain className="h-5 w-5 text-blue-400" />;
+      case "paper":
+        return <Sigma className="h-5 w-5 text-[#EEEEEE]" />;
+      case "research":
+        return <Calculator className="h-5 w-5 text-[#EEEEEE]" />;
       default:
         return <BookOpen className="h-5 w-5 text-gray-400" />;
     }
@@ -166,10 +199,7 @@ const ResearchSection = ({
   return (
     <div
       ref={sectionRef}
-      className="w-full min-h-screen bg-black py-16 px-4 md:px-8 flex flex-col items-center"
-      style={{
-        background: "linear-gradient(to bottom, #000000, #0a0010, #10001a)",
-      }}
+      className="w-screen min-h-screen bg-gradient-to-b from-[#1D1616] via-black to-[#D84040]/25 z-0 py-16 px-4 md:px-8 flex flex-col items-center"
     >
       <motion.div
         initial={{ opacity: 0, y: 20 }}
@@ -190,36 +220,24 @@ const ResearchSection = ({
           onValueChange={setActiveTab}
           className="w-full mb-8"
         >
-          <TabsList className="grid grid-cols-5 max-w-2xl mx-auto bg-gray-900/50">
+          <TabsList className="grid grid-cols-3 max-w-2xl mx-auto bg-gray-900/50">
             <TabsTrigger
               value="all"
-              className="data-[state=active]:bg-purple-900/50 data-[state=active]:text-white"
+              className="data-[state=active]:bg-[#8E1616] data-[state=active]:text-white"
             >
               All
             </TabsTrigger>
             <TabsTrigger
-              value="combinatorics"
-              className="data-[state=active]:bg-purple-900/50 data-[state=active]:text-white"
+              value="paper"
+              className="data-[state=active]:bg-[#8E1616] data-[state=active]:text-white"
             >
-              Combinatorics
+              Papers
             </TabsTrigger>
             <TabsTrigger
-              value="statistics"
-              className="data-[state=active]:bg-purple-900/50 data-[state=active]:text-white"
+              value="research"
+              className="data-[state=active]:bg-[#8E1616] data-[state=active]:text-white"
             >
-              Statistics
-            </TabsTrigger>
-            <TabsTrigger
-              value="probability"
-              className="data-[state=active]:bg-purple-900/50 data-[state=active]:text-white"
-            >
-              Probability
-            </TabsTrigger>
-            <TabsTrigger
-              value="machine learning"
-              className="data-[state=active]:bg-purple-900/50 data-[state=active]:text-white"
-            >
-              ML
+              Research Assistant
             </TabsTrigger>
           </TabsList>
 
@@ -235,37 +253,37 @@ const ResearchSection = ({
                 variants={paperVariants}
                 className="research-card"
               >
-                <Card className="bg-gray-900/40 border-purple-900/30 hover:border-purple-500/50 transition-all duration-300 h-full">
+                <Card className="bg-gray-900/40 border-[#D84040]/30 hover:border-[#D84040]/50 transition-all duration-300 h-full">
                   <CardHeader className="pb-2">
                     <div className="flex justify-between items-start">
-                      <div className="flex items-center space-x-2">
+                      <div className="flex items-center space-x-3">
                         {getFieldIcon(paper.field)}
-                        <span className="text-sm text-gray-400">
+                        <span className="text-sm text-[#EEEEEE]">
                           {paper.field} • {paper.year}
                         </span>
                       </div>
                     </div>
-                    <CardTitle className="text-xl text-white mt-2">
+                    <CardTitle className="text-xl text-white mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#8E1616] to-[#D84040]">
                       {paper.title}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <CardDescription className="text-gray-400 mb-4">
+                    <CardDescription className="text-[#EEEEEE] mb-4">
                       {selectedPaper === paper.id
-                        ? paper.abstract
-                        : `${paper.abstract.substring(0, 120)}...`}
+                        ?  `${paper.abstract.substring(0, 120)}...`
+                        : paper.abstract}
                     </CardDescription>
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-purple-400 hover:text-purple-300 hover:bg-purple-900/20 p-0"
+                      className="text-[#D84040]/100 hover:text-[#D84040] hover:bg-[#D84040]/20 p-0 px-1 py-1"
                       onClick={() =>
                         setSelectedPaper(
                           selectedPaper === paper.id ? null : paper.id,
                         )
                       }
                     >
-                      {selectedPaper === paper.id ? "Show Less" : "Read More"}
+                      {selectedPaper === paper.id ? "Read More" : " Show Less"}
                       <ChevronRight className="h-4 w-4 ml-1" />
                     </Button>
                   </CardContent>
