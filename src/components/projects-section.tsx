@@ -125,6 +125,7 @@ const ProjectItem = ({ project, index }) => {
       ref={projectRef}
       initial={{ y: 50, opacity: 0 }}
       animate={isInView ? { y: 0, opacity: 1 } : { y: 50, opacity: 0 }}
+      whileHover={{ scale: 1.05 }}
       transition={{ duration: 0.6, delay: index % 2 * 0.2 }}
       className="rounded-xl overflow-hidden shadow-2xl bg-black/40 flex flex-col h-full"
     >

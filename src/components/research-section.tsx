@@ -8,10 +8,11 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { ChevronRight, BookOpen, Brain, Calculator, Sigma } from "lucide-react";
+import { ChevronRight, BookOpen, Brain, Calculator, Sigma, ExternalLink, Calendar, Tag } from "lucide-react";
 import MathVisualization from "@/components/math-visualization";
 
 interface ResearchSectionProps {
@@ -35,46 +36,16 @@ const ResearchSection = ({
   papers = [
     {
       id: "paper1",
-      title: "Out-of-Distribution Detection(OOD) using Variational Autoencoder(VAE) on Resource Constrained FPGA: A literature review and framework - CURRENTLY WORKING ON NEXT ITERATION",
+      title: "Out-of-Distribution Detection(OOD) using Variational Autoencoder(VAE) on Resource Constrained FPGA: A literature review and framework",
       abstract:
-        ` With the increased deployment of AI 
-models for different fields ranging from 
-manufacturing to creatives, it is imperative to 
-improve the detection of outliers (Out-of-Distribution 
-(OOD)) in the input data to mitigate the risk 
-associated with incorrect inference. Moreover, with 
-the increase in the speed of inference and data 
-pipelining, it is important to increase the throughput 
-of these detection systems while keeping the power 
-efficiency in mind. This paper focuses on creating a 
-framework for deploying a Variational Autoencoder 
-(VAE) on a resource constrained Field 
-Programmable Gate Array (FPGA): A Variational 
-Autoencoder is a statistical model that uses a 
-reconstruction probability for OOD; Running this on 
-an FPGA can help in decreasing the power 
-consumption for ML inference while also increasing 
-the throughput while keeping the accuracy of the 
-model within acceptable thresholds. The 
-applications of this are mainly in time-sensitive 
-environments such as Cyber Physical Systems 
-(CPS)[1], and statistical arbitrage for High 
-Frequency Trading (HFT). For example, it is 
-important to process the enormous amount of 
-market data from the stock exchange and perform 
-feature extraction on it within milliseconds. While 
-extensive scholarly attention has been devoted to 
-exploring various machine learning inference 
-methods on FPGAs, it is essential to explore the 
-specific application of VAEs on FPGAs due to its 
-specialized nature. `,
+        ` With the increased deployment of AI models for different fields ranging from manufacturing to creatives, it is imperative to improve the detection of outliers (Out-of-Distribution(OOD)) in the input data to mitigate the risk associated with incorrect inference. Moreover, with the increase in the speed of inference and data pipelining, it is important to increase the throughput of these detection systems while keeping the power efficiency in mind. This paper focuses on creating a framework for deploying a Variational Autoencoder (VAE) on a resource constrained Field Programmable Gate Array (FPGA): A Variational Autoencoder is a statistical model that uses a reconstruction probability for OOD; Running this on an FPGA can help in decreasing the power consumption for ML inference while also increasing the throughput while keeping the accuracy of the model within acceptable thresholds. The applications of this are mainly in time-sensitive environments such as Cyber Physical Systems (CPS)[1], and statistical arbitrage for High Frequency Trading (HFT). For example, it is important to process the enormous amount of market data from the stock exchange and perform feature extraction on it within milliseconds. While extensive scholarly attention has been devoted to exploring various machine learning inference methods on FPGAs, it is essential to explore the specific application of VAEs on FPGAs due to its specialized nature. `,
       field: "Paper",
       year: 2023,
     },
     {
       id: "paper2",
       title:
-        "Learning Differences between STEM and NON-STEM Students in an Interdisciplinary Classroom Setting: A Qualitative and Quantitative Analysis using Natural Language Processing and Statistical Tests - STILL IN PROGRESS",
+        "Learning Differences between STEM and NON-STEM Students in an Interdisciplinary Classroom Setting: A Qualitative and Quantitative Analysis using Natural Language Processing and Statistical Tests",
       abstract:
         `This paper explores the differences in the learning outcomes and performances of students from different backgrounds(analysed based on STEM or NON-STEM and further categorisation where required.)
         We use a two-pronged approach - Quantitative(basic statistical tests to measure differences in assessment scores) and Qualitative Analysis(Natural Language Processing Methods like Topic Modelling using Latent Dirichlet Allocation
@@ -107,8 +78,14 @@ specialized nature. `,
   ],
 }: ResearchSectionProps) => {
   const [activeTab, setActiveTab] = useState("all");
-  const [selectedPaper, setSelectedPaper] = useState<string | null>(null);
+  const [expandedPaper, setExpandedPaper] = useState<string | null>(null);
   const sectionRef = useRef<HTMLDivElement>(null);
+
+  // Format abstract text to display in a more organized way
+  const formatAbstract = (text: string) => {
+    // Split the text into paragraphs
+    return text.split('\n').filter(line => line.trim().length > 0);
+  };
 
   const filteredPapers =
     activeTab === "all"
@@ -195,6 +172,18 @@ specialized nature. `,
         return <BookOpen className="h-5 w-5 text-gray-400" />;
     }
   };
+  
+  // Get a color for the paper category badge
+  const getFieldColor = (field: string) => {
+    switch (field.toLowerCase()) {
+      case "paper":
+        return "bg-gradient-to-r from-[#8E1616]/25 to-[#D84040]/25 text-[#EEEEEE] border-blue-500/30";
+      case "research":
+        return "bg-gradient-to-r from-[#8E1616]/25 to-[#D84040]/25 text-[#EEEEEE] border-purple-500/30";
+      default:
+        return "bg-gradient-to-r from-[#8E1616]/25 to-[#D84040]/25 text-[#EEEEEE] border-gray-500/30";
+    }
+  };
 
   return (
     <div
@@ -252,41 +241,71 @@ specialized nature. `,
                 key={paper.id}
                 variants={paperVariants}
                 className="research-card"
+                whileHover={{ scale: 1.05 }}
               >
-                <Card className="bg-gray-900/40 border-[#D84040]/30 hover:border-[#D84040]/50 transition-all duration-300 h-full">
-                  <CardHeader className="pb-2">
-                    <div className="flex justify-between items-start">
-                      <div className="flex items-center space-x-3">
+                <Card className="bg-gray-900/40 border-[#D84040]/30 hover:border-[#D84040]/50 transition-all duration-300 h-full flex flex-col">
+                  <CardHeader className="pb-2 relative">
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      <span className={`text-xs px-3 py-1 rounded-full border ${getFieldColor(paper.field)} flex items-center gap-1`}>
                         {getFieldIcon(paper.field)}
-                        <span className="text-sm text-[#EEEEEE]">
-                          {paper.field} • {paper.year}
-                        </span>
-                      </div>
+                        {paper.field}
+                      </span>
+                      <span className="text-xs px-3 py-1 rounded-full bg-gradient-to-r from-gray-600/20 to-gray-400/20 text-gray-200 border border-gray-500/30 flex items-center gap-1">
+                        <Calendar className="h-3 w-3" />
+                        {paper.year}
+                      </span>
                     </div>
-                    <CardTitle className="text-xl text-white mt-2 text-transparent bg-clip-text bg-gradient-to-r from-[#8E1616] to-[#D84040]">
+                    
+                    <CardTitle className="text-xl text-white text-transparent bg-clip-text bg-gradient-to-r from-[#8E1616] to-[#D84040]">
                       {paper.title}
                     </CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <CardDescription className="text-[#EEEEEE] mb-4">
-                      {selectedPaper === paper.id
-                        ?  `${paper.abstract.substring(0, 120)}...`
-                        : paper.abstract}
-                    </CardDescription>
+                  
+                  <CardContent className="flex-grow">
+                    <div className="prose prose-invert prose-sm max-w-none">
+                      {expandedPaper === paper.id ? (
+                        // Expanded view with formatted abstract
+                        <div className="space-y-3">
+                          {formatAbstract(paper.abstract).map((paragraph, idx) => (
+                            <p key={idx} className="text-[#EEEEEE] leading-relaxed">
+                              {paragraph.trim()}
+                            </p>
+                          ))}
+                        </div>
+                      ) : (
+                        // Collapsed view with preview
+                        <div>
+                          <p className="text-[#EEEEEE] line-clamp-3">
+                            {paper.abstract.substring(0, 200)}...
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                  
+                  <CardFooter className="pt-2 flex justify-between items-center border-t border-gray-800/40 mt-auto">
                     <Button
                       variant="ghost"
                       size="sm"
-                      className="text-[#D84040]/100 hover:text-[#D84040] hover:bg-[#D84040]/20 p-0 px-1 py-1"
-                      onClick={() =>
-                        setSelectedPaper(
-                          selectedPaper === paper.id ? null : paper.id,
-                        )
-                      }
+                      className="text-[#D84040] hover:text-[#D84040] hover:bg-[#D84040]/10 flex items-center gap-1"
+                      onClick={() => setExpandedPaper(expandedPaper === paper.id ? null : paper.id)}
                     >
-                      {selectedPaper === paper.id ? "Read More" : " Show Less"}
-                      <ChevronRight className="h-4 w-4 ml-1" />
+                      {expandedPaper === paper.id ? "Show Less" : "Read More"}
+                      <ChevronRight className={`h-4 w-4 transform transition-transform ${expandedPaper === paper.id ? 'rotate-90' : ''}`} />
                     </Button>
-                  </CardContent>
+                    
+                    {paper.link && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="text-white border-[#D84040]/50 hover:bg-[#D84040]/10"
+                        onClick={() => window.open(paper.link, '_blank')}
+                      >
+                        <ExternalLink className="h-4 w-4 mr-1" />
+                        View Paper
+                      </Button>
+                    )}
+                  </CardFooter>
                 </Card>
               </motion.div>
             ))}
