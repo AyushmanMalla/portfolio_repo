@@ -37,7 +37,7 @@
     "react-resizable-panels": "^2.1.7",
     "react-spring": "^9.7.5",
     "stripe": "^17.6.0",
-    "tempo-devtools": "^2.0.69",
+    "tempo-devtools": "^2.0.94",
     "three": "^0.174.0",
     "vaul": "^1.1.2"
   },
